@@ -40,11 +40,13 @@ class ChildRegisterSerializer(serializers.Serializer):
         user.set_password(password)
         user.save()
 
+        # Creating child instance for the user
         child = Child.objects.create(
             user=user,
             favorite_color=favorite_color,
         )
 
+        # Association Child user with parents
         for parent_uid in parent_uids:
             try:
                 parent = Parent.objects.get(uid=parent_uid)

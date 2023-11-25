@@ -32,6 +32,7 @@ class ParentRegisterSerializer(serializers.Serializer):
             user.set_password(password)
             user.save()
 
+            # Creating Parent instance for the user
             parent = Parent.objects.create(
                 user=user,
                 street=street,
