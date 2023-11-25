@@ -2,7 +2,7 @@ from rest_framework import serializers
 from child.models import Child
 from parent.models import Parent
 from user.models import User
-from user.rest.serializers.user import UserSerializer
+from user.rest.serializers.user import UserSerializer, UserRegisterSerializer
 from parent.rest.serilizers.parent_register import ParentSerializer
 
 
@@ -16,7 +16,7 @@ class ChildSerializer(serializers.ModelSerializer):
 
 
 class ChildRegisterSerializer(serializers.Serializer):
-    user = UserSerializer()
+    user = UserRegisterSerializer()
     password = serializers.CharField(write_only=True)
     parent_uids = serializers.ListField(
         child=serializers.UUIDField(), required=False

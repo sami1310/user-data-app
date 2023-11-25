@@ -9,3 +9,9 @@ class UserSerializer(serializers.ModelSerializer):
 
     # Set email field as read-only
     email = serializers.EmailField(read_only=True)
+
+
+class UserRegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["uid", "first_name", "last_name", "email", "gender", "user_role"]

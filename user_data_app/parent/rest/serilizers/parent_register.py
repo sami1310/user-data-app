@@ -1,11 +1,11 @@
 from rest_framework import serializers
 from parent.models import Parent
 from user.models import User
-from user.rest.serializers.user import UserSerializer
+from user.rest.serializers.user import UserSerializer, UserRegisterSerializer
 
 
 class ParentRegisterSerializer(serializers.Serializer):
-    user = UserSerializer()
+    user = UserRegisterSerializer()
     password = serializers.CharField(write_only=True)
     street = serializers.CharField(max_length=255)
     city = serializers.CharField(max_length=100)
