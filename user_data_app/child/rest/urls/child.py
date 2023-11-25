@@ -1,6 +1,10 @@
 from django.urls import path
-from child.rest.views import child_register
+from child.rest.views import child_register, child_update
 
 urlpatterns = [
+    path(
+        "/<uuid:uid>", child_update.UpdateChildInfo.as_view(), name="update-child-info"
+    ),
+    path("/register", child_register.ChildRegister.as_view(), name="child-register"),
     path("", child_register.childList.as_view(), name="child-list"),
 ]
