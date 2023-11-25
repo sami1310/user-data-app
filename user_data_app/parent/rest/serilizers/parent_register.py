@@ -20,24 +20,36 @@ class ParentRegisterSerializer(serializers.Serializer):
         state = validated_data.get("state")
         zip_code = validated_data.get("zip_code")
 
-        user = User.objects.create(
-            email=user_data.get("email"),
-            first_name=user_data.get("first_name"),
-            last_name=user_data.get("last_name"),
-            gender=user_data.get("gender"),
-            user_role="Parent",
-        )
+        try:
+            user = User.objects.create(
+                email=user_data.get("email"),
+                first_name=user_data.get("first_name"),
+                last_name=user_data.get("last_name"),
+                gender=user_data.get("gender"),
+                user_role="Parent",
+            )
 
-        user.set_password(password)
-        user.save()
+            user.set_password(password)
+            user.save()
 
-        parent = Parent.objects.create(
-            user=user,
-            street=street,
-            city=city,
-            state=state,
-            zip_code=zip_code,
-            is_parent=True,
-        )
+            parent = Parent.objects.create(
+                user=user,
+                street=street,
+                city=city,
+                state=state,
+                zip_code=zip_code,
+                is_parent=True,
+            )
+
+        except Exception as e:
+            raise serializers.ValidationError({"error": str(e)})
 
         return parent
+
+
+class ParentSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Parent
+        fields = ["uid", "street", "city", "state", "zip_code", "user"]

@@ -50,4 +50,5 @@ urlpatterns = [
         name="token_verify",
     ),
     path("parent", include("parent.rest.urls.parent")),
+    path("child", include("child.rest.urls.child")),
 ]

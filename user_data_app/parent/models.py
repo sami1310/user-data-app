@@ -7,7 +7,11 @@ from .choices import PARENT_CHOICE
 
 class Parent(CustomeBase):
     user = models.OneToOneField(
-        settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="parent"
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="parent",
+        null=True,
+        blank=True,
     )
     street = models.CharField(max_length=255, blank=True)
     city = models.CharField(max_length=100, blank=True)
